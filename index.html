@@ -14,10 +14,10 @@
     <header>
       <div class="brand-name">BDC-NFT</div>
       <nav>
-        <a href="#">HOME</a>
-        <a href="#">ABOUT</a>
-        <a href="#">ROADMAP</a>
-        <a href="#">TEAM</a>
+        <a href="#HOME">HOME</a>
+        <a href="#ABOUT">ABOUT</a>
+        <a href="#ROADMAP">ROADMAP</a>
+        <a href="#TEAM">TEAM</a>
         <div class="dropdown">
             <button class="dropbtn">GALLERY &#9662;</button>
             <div class="dropdown-content">
@@ -29,7 +29,7 @@
 
     <main>
         <div class="card">
-          <h2>HOME</h2>
+          <h2 id="HOME">HOME</h2>
           <p>
             Welcome to BDC-NFT, a vibrant community for NFT enthusiasts! Whether you're an artist, collector, or simply someone who appreciates the beauty and value of NFTs, we invite you to join us. Here at BDC-NFT, we're passionate about building a community of like-minded individuals who share a common interest in NFTs. Our community is a place where you can connect with others who share your passion, share your work, and learn from each other. So come on in and be a part of something special! Let's build something amazing together.
           </p>
@@ -39,7 +39,7 @@
     <body class="move-on-scroll">
         <section class="about-section">
             <div class="about-wrapper">
-              <h2>ABOUT</h2>
+              <h2 id="ABOUT">ABOUT</h2>
               <p>
                 Welcome to BDC-NFT, a cutting-edge project from Lunar Labs that is at the forefront of the new technology revolution. Our goal is to bring the power of NFTs to the masses, empowering creators to protect and monetize their intellectual property like never before. With BDC-NFT, you can showcase your unique creations to a global audience, secure in the knowledge that they are one-of-a-kind digital assets that can never be replicated.
               </p>
@@ -53,7 +53,7 @@
         </section>
           
         <section class="roadmap-section">
-            <h2>ROADMAP</h2>
+            <h2 id="ROADMAP">ROADMAP</h2>
             <div>
               <p>
                 Our vision for the BDC-NFT project is to create a dynamic and engaging NFT platform that provides a unique and rewarding experience for collectors and creators alike. Here's what we have planned:
@@ -86,7 +86,7 @@
         </section>
           
         <section class="team">
-            <h2>TEAM</h2>
+            <h2 id="TEAM">TEAM</h2>
             <p>
               At BDC-NFT, our team is comprised of passionate innovators who are at the forefront of the NFT revolution. Our NFTs are considered intellectual property for Lunar Labs, and we are excited to be building a community of like-minded individuals who are as passionate about this new technology as we are. The world is changing rapidly, and our team is dedicated to creating a platform that empowers creators to showcase their unique talents and earn the recognition and compensation they deserve. So come join us, and be a part of something truly groundbreaking!
             </p>
@@ -105,11 +105,30 @@
           
           <div class="email-form">
             <h3>Stay Informed:</h3>
-            <form>
-              <input type="email" placeholder="Enter your email">
+            <form name="submit-to-google-sheet">
+              <input type="email" name="Email" placeholder="Enter your email" required>
               <button type="submit">Subscribe</button>
             </form>
+            <span id="msg"></span>
           </div>
+          <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxAtM-IkpXporN_H2L0uiyhS-OI7dtnyykugq2hIw8sTyD8xuo5m_Zc1W3SszPX0Exf/exec'
+            const form = document.forms['submit-to-google-sheet']
+            const msg=document.getElementById("msg")
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                  msg.innerHTML= "Thank you for subscribing! 🙌"
+                  setTimeout(function(){
+                    msg.innerHTML= ""
+                  },5000)
+                  form.reset()
+                })
+                .catch(error => console.error('Error!', error.message))
+            })
+          </script>
         </section>
         <footer>
           <p>Billion-Dollar-CollectibleNFT © 2023 - All Rights Reserved</p>
